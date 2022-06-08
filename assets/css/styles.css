@@ -1,0 +1,46 @@
+:root {
+    --page-header-left: #3b6ec3;
+    --page-header-right: #230355;
+    --card-background: #33475a;
+}
+
+#search-form {
+}
+#city-name {
+    margin: 5px 0;
+}
+.city-btn, #city-name {
+    width: 100%;
+}
+
+
+.page-header {
+    width: 100%;
+    background: linear-gradient(to right,var(--page-header-left),var(--page-header-right));
+    color: white;
+}
+
+.primary-card {
+    /* border: 1px solid black; */
+}
+
+.weather-card {
+    color: white;
+    background: var(--card-background) !important;
+    /* border: 1px solid black; */
+    width: fit-content !important;
+}
+
+.primary-card ul, .weather-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.primary-card ul li, .weather-card ul li {
+    margin: 4px 0px;
+}
+
+.primary-card .fw-bold {
+    font-size: 2vw;
+}
