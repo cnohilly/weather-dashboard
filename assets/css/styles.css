@@ -4,8 +4,7 @@
     --card-background: #33475a;
 }
 
-#search-form {
-}
+
 #city-name {
     margin: 5px 0;
 }
@@ -15,20 +14,18 @@
 
 
 .page-header {
-    width: 100%;
     background: linear-gradient(to right,var(--page-header-left),var(--page-header-right));
     color: white;
 }
 
 .primary-card {
-    /* border: 1px solid black; */
+    border: 1px solid black;
 }
 
 .weather-card {
     color: white;
     background: var(--card-background) !important;
-    /* border: 1px solid black; */
-    width: fit-content !important;
+    margin-bottom: 0.25rem;
 }
 
 .primary-card ul, .weather-card ul {
@@ -39,8 +36,4 @@
 
 .primary-card ul li, .weather-card ul li {
     margin: 4px 0px;
-}
-
-.primary-card .fw-bold {
-    font-size: 2vw;
 }
