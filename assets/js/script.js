@@ -2,6 +2,7 @@ var numDaysForecast = 5;
 var apiKey = '259f549c2c4387f7ce66babb16248971';
 var cityInputEl = document.querySelector('#city-name');
 var cityFormEl = document.querySelector('#search-form');
+var cityHistory = [];
 
 var formSubmitHandler = function(event){
     event.preventDefault();
