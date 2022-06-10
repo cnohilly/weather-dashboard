@@ -34,6 +34,15 @@
     margin: 0;
 }
 
-.primary-card ul li, .weather-card ul li {
+.primary-card ul li, .weather-card ul li, .weather-card div {
     margin: 4px 0px;
 }
+
+/* .primary-card > div:first-child {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.weather-card > div:first-child {
+    font-weight: bold;
+} */
