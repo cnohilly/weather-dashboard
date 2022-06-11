@@ -35,7 +35,9 @@ var getGeocoding = function (cityName) {
                 }
             })
         }
-    })
+    }).catch(function (error) {
+        alert("Unable to connect to OpenWeather");
+    });
 }
 
 var getOneCallData = function (lat, lon, city) {
