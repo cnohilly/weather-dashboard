@@ -2,19 +2,27 @@
     --page-header-left: #3b6ec3;
     --page-header-right: #230355;
     --card-background: #33475a;
+
+
+    --uvi-low: #a6d201;
+    --uvi-moderate: #ffc700;
+    --uvi-high: #fe9902;
+    --uvi-very-high: #fe612e;
 }
 
 
 #city-name {
     margin: 5px 0;
 }
-.city-btn, #city-name {
+
+.city-btn,
+#city-name {
     width: 100%;
 }
 
 
 .page-header {
-    background: linear-gradient(to right,var(--page-header-left),var(--page-header-right));
+    background: linear-gradient(to right, var(--page-header-left), var(--page-header-right));
     color: white;
 }
 
@@ -28,14 +36,33 @@
     margin-bottom: 0.25rem;
 }
 
-.primary-card ul, .weather-card ul {
+.primary-card ul,
+.weather-card ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.primary-card ul li, .weather-card ul li, .weather-card div {
+.primary-card ul li,
+.weather-card ul li,
+.weather-card div {
     margin: 4px 0px;
+}
+
+.uvi-low {
+    background-color: var(--uvi-low);
+}
+
+.uvi-moderate {
+    background-color: var(--uvi-moderate);
+}
+
+.uvi-high {
+    background-color: var(--uvi-high);
+}
+
+.uvi-very-high {
+    background-color: var(--uvi-very-high);
 }
 
 /* .primary-card > div:first-child {

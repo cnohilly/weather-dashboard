@@ -4,6 +4,7 @@ var localStorageKey = 'weather-dashboard-history';
 var cityInputEl = document.querySelector('#city-name');
 var cityFormEl = document.querySelector('#search-form');
 var historyEl = $('.weather-history');
+var weatherCol = $('.weather-col');
 var cityHistory;
 
 var formSubmitHandler = function (event) {
@@ -17,19 +18,6 @@ var formSubmitHandler = function (event) {
     } else {
         alert("Please enter valid city name");
     }
-}
-
-var getOneCallData = function (lat, lon, city) {
-    // Gets the one call data using latitude and longitude, excluding the hourly and minutely weather, in imperial units
-    var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat +
-        '&lon=' + lon + '&exclude=hourly,minutely&units=imperial&appid=' + apiKey;
-    fetch(apiUrl).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                saveCityName(city);
-            });
-        }
-    })
 }
 
 // Using the city name it gets the geocoding information to get the latitude and longitude to pass for the OneCall API
@@ -46,6 +34,21 @@ var getGeocoding = function (cityName) {
                     alert('Please enter a valid city name.');
                 }
             })
+        }
+    })
+}
+
+var getOneCallData = function (lat, lon, city) {
+    // Gets the one call data using latitude and longitude, excluding the hourly and minutely weather, in imperial units
+    var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat +
+        '&lon=' + lon + '&exclude=hourly,minutely&units=imperial&appid=' + apiKey;
+    fetch(apiUrl).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+                console.log(data);
+                displayWeather(data,city);
+                saveCityName(city);
+            });
         }
     })
 }
@@ -110,7 +113,7 @@ var saveHistory = function () {
 }
 
 // Attempts to load the history of searches from local storage
-function loadHistory() {
+var loadHistory = function() {
     cityHistory = localStorage.getItem(localStorageKey);
     if (!cityHistory) {
         cityHistory = [];
@@ -119,6 +122,92 @@ function loadHistory() {
         createHistory();
     }
 };
+
+var displayWeather = function(data,city){
+    weatherCol.empty();
+    var divEl = $('<div>').addClass('col-12 primary-card p-2');
+    loadWeatherInformation(divEl,data.current,city);
+    var rowEl = $('<div>').addClass('row')
+        .append(divEl);
+    weatherCol.append(rowEl);
+    divEl = $('<div>').addClass('col-12')
+        .append($('<h4>').text('5 Day Forecast:'));
+    rowEl = $('<div>').addClass('row')
+        .append(divEl);
+    weatherCol.append(rowEl);
+    var rowEl = $('<div>').addClass('row justify-content-between');
+    for(var i = 1; i < 6; i++){
+        var divEl = $('<div>').addClass('col-xl-auto col-12 weather-card border p-2');
+        loadWeatherInformation(divEl,data.daily[i]);
+        rowEl.append(divEl);        
+    }
+    weatherCol.append(rowEl);
+    // var weatherInfo = new Map();
+    // weatherInfo.set('temp',data.current.temp + '\u00B0F');
+    // weatherInfo.set('wind',data.current.wind_speed + " MPH");
+    // weatherInfo.set('humidity',data.current.humidity + "%");
+    // weatherInfo.set('uvi',data.current.uvi)
+    // weatherInfo.push(createInfoObject('Temp','temp',data.current.temp + '\u00B0F'));
+    // weatherInfo.push(createInfoObject('Wind','wind',data.current.wind_speed + " MPH"));
+    // weatherInfo.push(createInfoObject('Humidity','humidity',''))
+
+}
+
+var createInfoObject = function(displayName, className, value){
+    var infoObj = {
+        display: displayName,
+        class: className,
+        val: value
+    };
+    return infoObj;
+}
+var createWeatherInfoDiv = function(displayName,classes,val){
+    var divEl = $('<div>')
+    if (displayName){
+        divEl.text(displayName + ": ");
+    }
+    var spanEl = $('<span>').addClass(classes).text(val);
+    divEl.append(spanEl);
+    return divEl;
+};
+
+var loadWeatherInformation = function(primaryEl, data, city){
+    var divEl, spanEl;
+    var date = new Date(data.dt * 1000);
+    var dateString = date.getMonth()+1 +'/'+ date.getDate() +'/'+ date.getFullYear();
+    var imgEl = $('<img>').attr('src','https://openweathermap.org/img/wn/'+ data.weather[0].icon +'.png');
+    primaryEl.append(createWeatherInfoDiv('Wind','wind',data.wind_speed + ' MPH'));
+    primaryEl.append(createWeatherInfoDiv('Humidity','humidity',data.humidity + '%'));
+    
+    // Checks if element is the primary card meant for the top display
+    // and appends or prepends elements accordingly as the data is handled
+    // or displayed differently
+    if(primaryEl.hasClass('primary-card')){
+        primaryEl.prepend(createWeatherInfoDiv('Temp','temp',data.temp));
+        divEl = createWeatherInfoDiv('','date fw-bold fs-2',city + " (" + dateString + ")");
+        divEl.append(imgEl);
+        primaryEl.prepend(divEl);
+        primaryEl.append(createWeatherInfoDiv('UV Index','uvi rounded px-3 py-1 text-white '+getUVIClass(data.uvi),data.uvi));
+    // Normal weather card for 5 day forecast
+    } else {
+        primaryEl.prepend(createWeatherInfoDiv('Temp','temp',data.temp.day));
+        primaryEl.prepend(imgEl);
+        primaryEl.prepend(createWeatherInfoDiv('','date fw-bold',dateString));
+    }
+}
+
+// function to get the class to add to the uv index for background color
+var getUVIClass = function(uvi){
+    if (uvi > 7){
+        return 'uvi-very-high';
+    } else if (uvi > 5){
+        return 'uvi-high';
+    } else if (uvi > 2){
+        return 'uvi-moderate';
+    } else {
+        return 'uvi-low';
+    }
+}
 
 cityFormEl.addEventListener('submit', formSubmitHandler);
 
