@@ -23,7 +23,7 @@ var formSubmitHandler = function (event) {
 
 // Using the city name it gets the geocoding information to get the latitude and longitude to pass for the OneCall API
 var getGeocoding = function (cityName) {
-    var apiUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&appid=' + apiKey;
+    var apiUrl = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&appid=' + apiKey;
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
