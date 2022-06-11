@@ -1,8 +1,8 @@
 # 06 Server-Side APIs: Weather Dashboard
 
-Developers are often tasked with retrieving data from another application's API and using it in the context of their own. Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Your challenge is to build a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS.
+## Description
 
-Use the [OpenWeather One Call API](https://openweathermap.org/api/one-call-api) to retrieve weather data for cities. Read through the documentation for setup and usage instructions. You will use `localStorage` to store any persistent data.
+This project was to develop a dashboard to allow the user to search a city name and be shown the current weather and a 5 day forecast. When searching, the history of searches should be saved and available as buttons on the side for the user to easily view that location again and be saved and displayed when returning to the page. The weather data for cities was gathered using the [OpenWeather API](https://openweathermap.org/api) and using their Geocoding and One Call API. The page is made using Bootstrap to handle a lot of the styling and much of the page made dynamically with JavaScript and jQuery. Using Bootstrap, the page was built to be responsive and work on mobile and smaller screens.
 
 ## User Story
 
@@ -32,13 +32,9 @@ The following image demonstrates the application functionality:
 
 ![weather dashboard demo](./assets/images/06-server-side-apis-homework-demo.png)
 
-## Review
+## Product
 
-You are required to submit the following for review:
+The following is a link to the deployed application: [Weather Dashboard](https://cnohilly.github.io/weather-dashboard/)
 
-* The URL of the deployed application.
-
-* The URL of the GitHub repository. Give the repository a unique name and include a high-quality README describing the project.
-
-- - -
-© 2022 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+The following is a demonstration of the deployed application:
+![Demonstration of Weather Dashboard application](./assets/images/weather_dashboard.gif)
