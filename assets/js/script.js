@@ -3,6 +3,7 @@ var apiKey = '259f549c2c4387f7ce66babb16248971';
 var localStorageKey = 'weather-dashboard-history';
 var cityInputEl = document.querySelector('#city-name');
 var cityFormEl = document.querySelector('#search-form');
+var historyCardEl = $('.history-card');
 var historyEl = $('.weather-history');
 var weatherCol = $('.weather-col');
 var cityHistory;
@@ -88,6 +89,9 @@ var saveCityName = function (city) {
         cityHistory.push(city);
         createHistory();
     }
+    if (historyCardEl.hasClass('d-none')){
+        historyCardEl.removeClass('d-none');
+    }
     saveHistory();
 }
 
@@ -118,6 +122,7 @@ var loadHistory = function() {
     cityHistory = localStorage.getItem(localStorageKey);
     if (!cityHistory) {
         cityHistory = [];
+        historyCardEl.addClass('d-none');
     } else {
         cityHistory = JSON.parse(cityHistory);
         createHistory();
