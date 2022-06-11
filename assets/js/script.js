@@ -154,6 +154,7 @@ var createWeatherInfoDiv = function(displayName,classes,val){
     return divEl;
 };
 
+// Loads the weather information into the element passed in using the data array passed in
 var loadWeatherInformation = function(primaryEl, data, city){
     var divEl, spanEl;
     var date = new Date(data.dt * 1000);
@@ -193,6 +194,8 @@ var getUVIClass = function(uvi){
 }
 
 cityFormEl.addEventListener('submit', formSubmitHandler);
-
+historyEl.on('click','button',function(event){
+    getGeocoding(event.target.textContent);
+});
 
 loadHistory();
