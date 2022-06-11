@@ -3,7 +3,6 @@
     --page-header-right: #230355;
     --card-background: #33475a;
 
-
     --uvi-low: #a6d201;
     --uvi-moderate: #ffc700;
     --uvi-high: #fe9902;
@@ -14,12 +13,10 @@
 #city-name {
     margin: 5px 0;
 }
-
 .city-btn,
 #city-name {
     width: 100%;
 }
-
 
 .page-header {
     background: linear-gradient(to right, var(--page-header-left), var(--page-header-right));
@@ -36,15 +33,10 @@
     margin-bottom: 0.25rem;
 }
 
-.primary-card ul,
-.weather-card ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.primary-card div {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
-
-.primary-card ul li,
-.weather-card ul li,
 .weather-card div {
     margin: 4px 0px;
 }
@@ -64,12 +56,3 @@
 .uvi-very-high {
     background-color: var(--uvi-very-high);
 }
-
-/* .primary-card > div:first-child {
-    font-weight: bold;
-    font-size: 2rem;
-}
-
-.weather-card > div:first-child {
-    font-weight: bold;
-} */

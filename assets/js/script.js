@@ -7,6 +7,7 @@ var historyEl = $('.weather-history');
 var weatherCol = $('.weather-col');
 var cityHistory;
 
+// Handles the search form and will attempt to get weather data for a city
 var formSubmitHandler = function (event) {
     event.preventDefault();
     var cityName = cityInputEl.value.trim();
@@ -26,7 +27,6 @@ var getGeocoding = function (cityName) {
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                console.log(data);
                 // Will be an empty array if we entered an invalid location
                 if (data.length > 0) {
                     getOneCallData(data[0].lat, data[0].lon, cityName);
@@ -45,7 +45,6 @@ var getOneCallData = function (lat, lon, city) {
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                console.log(data);
                 displayWeather(data,city);
                 saveCityName(city);
             });
@@ -142,25 +141,9 @@ var displayWeather = function(data,city){
         rowEl.append(divEl);        
     }
     weatherCol.append(rowEl);
-    // var weatherInfo = new Map();
-    // weatherInfo.set('temp',data.current.temp + '\u00B0F');
-    // weatherInfo.set('wind',data.current.wind_speed + " MPH");
-    // weatherInfo.set('humidity',data.current.humidity + "%");
-    // weatherInfo.set('uvi',data.current.uvi)
-    // weatherInfo.push(createInfoObject('Temp','temp',data.current.temp + '\u00B0F'));
-    // weatherInfo.push(createInfoObject('Wind','wind',data.current.wind_speed + " MPH"));
-    // weatherInfo.push(createInfoObject('Humidity','humidity',''))
-
 }
 
-var createInfoObject = function(displayName, className, value){
-    var infoObj = {
-        display: displayName,
-        class: className,
-        val: value
-    };
-    return infoObj;
-}
+// function to avoid repeating the same actions and simplify element creation
 var createWeatherInfoDiv = function(displayName,classes,val){
     var divEl = $('<div>')
     if (displayName){
@@ -211,7 +194,5 @@ var getUVIClass = function(uvi){
 
 cityFormEl.addEventListener('submit', formSubmitHandler);
 
-loadHistory();
 
-$('.primary-card > div:first-child').addClass('fw-bold fs-2');
-$('.weather-card > div:first-child').addClass('fw-bold');
+loadHistory();
